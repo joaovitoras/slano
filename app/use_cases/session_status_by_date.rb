@@ -26,6 +26,7 @@ class SessionStatusByDate
     sessions = select_values(sessions)
     sessions = group_by_date(sessions)
     sessions = count_by_status(sessions)
+    sessions = sort_by_date(sessions)
     sessions = chart_js_data(sessions)
   end
 
@@ -67,6 +68,10 @@ class SessionStatusByDate
           end
       }
     end.inject(:merge)
+  end
+
+  def sort_by_date(sessions)
+    sessions.sort.to_h
   end
 
   def chart_js_data(sessions)
