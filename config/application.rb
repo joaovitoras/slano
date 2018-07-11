@@ -16,6 +16,6 @@ module Slano
     # -- all .rb files in that directory are automatically loaded.
 
     config.autoload_paths += %W(#{config.root}/lib)
-    # config.autoload_paths += %W(#{config.root}/app/use_cases)
+    config.eager_load_paths += %W(#{config.root}/lib)
   end
 end
