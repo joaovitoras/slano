@@ -1,9 +1,12 @@
-<h1>Histórico de status desde o dia <%= Date.current - 1.month %></h1>
+<%= render 'navbar' %>
 
-<div class="graph-wrapper">
-  <div class="loading-wrappper" id="js-loading">
-    <%= image_tag 'loading.svg' %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="loading-wrappper" id="js-loading">
+      <%= image_tag 'loading.svg' %>
+    </div>
+
+    <canvas id="historyChartCanvas" width="50%"></canvas>
   </div>
+</div>
 
-  <canvas id="myChart" width="50%"></canvas>
-<div>

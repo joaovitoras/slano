@@ -11,7 +11,9 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require chart.js/dist/Chart.min.js
 //= require jquery/dist/jquery.min.js
+//= require bootstrap/dist/js/bootstrap.min.js
 //= require_tree .
+
+Chart.defaults.global.defaultFontColor = '#f8f9fa';
