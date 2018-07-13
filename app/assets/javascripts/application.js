@@ -13,7 +13,16 @@
 //= require rails-ujs
 //= require chart.js/dist/Chart.min.js
 //= require jquery/dist/jquery.min.js
-//= require bootstrap/dist/js/bootstrap.min.js
+//= require bootstrap/dist/js/bootstrap.bundle.min.js
 //= require_tree .
 
 Chart.defaults.global.defaultFontColor = '#f8f9fa';
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    template: '<div class="popover text-dark" role="tooltip">' +
+                '<div class="arrow"></div>' +
+                '<h3 class="popover-header"></h3>' +
+                '<div class="popover-body"></div>' +
+              '</div>'
+  })
+})

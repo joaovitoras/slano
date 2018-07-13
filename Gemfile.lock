@@ -53,6 +53,7 @@ GEM
       xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     domain_name (0.5.20180417)
@@ -62,6 +63,8 @@ GEM
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
+    font-awesome-sass (5.0.13)
+      sassc (>= 1.11)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     http-cookie (1.0.3)
@@ -93,6 +96,11 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
@@ -142,6 +150,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (1.12.1)
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
     selenium-webdriver (3.13.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
@@ -185,9 +196,12 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   envyable
+  font-awesome-sass (~> 5.0.13)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg
+  pry
+  pry-rails
   puma (~> 3.7)
   rails (~> 5.1.6)
   rest-client

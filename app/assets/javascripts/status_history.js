@@ -2,14 +2,36 @@
 // All this logic will automatically be available in application.js.
 
 const formFilter = $('#js-form-filter');
-
+const bronkTestLink = $('#broken-test-alert')
 formFilter.submit((e) => {
   e.preventDefault();
   loadChart();
+  loadBrokenTestAlert();
 })
 
+bronkTestLink.click(() => {
+  bronkTestLink.removeClass('jello-horizontal');
+})
+
+function loadBrokenTestAlert() {
+  $.ajax("broken_tests", {
+    data: formFilter.serialize()
+  }).done(function (testNames) {
+    if (testNames.length > 0) {
+      bronkTestLink.addClass("text-warning jello-horizontal");
+      bronkTestLink.attr("data-content", testNames);
+    } else {
+      bronkTestLink.removeClass('text-warning jello-horizontal');
+    }
+  })
+  .fail(function () {
+    alert("error");
+  });
+}
+
+
 function loadChart() {
-  $.ajax("data",  {
+  $.ajax("sessions_status_by_date", {
     data: formFilter.serialize()
   }).done(function (data) {
       var ctx = document.getElementById('historyChartCanvas').getContext('2d');
@@ -45,3 +67,4 @@ function loadChart() {
 }
 
 loadChart();
+loadBrokenTestAlert();

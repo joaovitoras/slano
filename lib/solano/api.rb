@@ -15,6 +15,10 @@ module Solano
       @client.get(url("/sessions"), {suite_id: suite_id, limit: limit})
     end
 
+    def test_executions(session_id)
+      @client.get(url("/sessions/#{session_id}/test_executions/query"), {})
+    end
+
     def url(path)
       @endpoint + path
     end
