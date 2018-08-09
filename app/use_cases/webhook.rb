@@ -9,6 +9,7 @@ class Webhook
   end
 
   def perform
+    return unless pull_request.present?
     return unless merged?
     return unless default_branch?
 
