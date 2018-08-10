@@ -4,17 +4,15 @@ class Webhook
 
   def initialize(params)
     payload = JSON.parse(params[:payload] || "{}").with_indifferent_access
-    Rails.logger.info("parametros #{payload}")
-    Rails.logger.info(payload[:pull_request])
     @api = Solano::Api.new
     @pull_request = payload[:pull_request]
     @sender = payload[:sender]
   end
 
   def perform
-    return Rails.logger.info("status: sem pr") unless pull_request.present?
-    return Rails.logger.info("status: merged") unless merged?
-    return Rails.logger.info("status: não é na branch default") unless default_branch?
+    return log_status("Sem PR") unless pull_request.present?
+    return log_status("Não merged") unless merged?
+    return log_status("Não é merge na branch default") unless default_branch?
 
     status = solano_status
     send("notify_#{status}") if status.present?
@@ -63,5 +61,9 @@ class Webhook
     RestClient.post(ENV['SLACK_WEBHOOK_URL'], {
       text: message, icon_url: sender["avatar_url"], username: sender["login"]
     }.to_json)
+  end
+
+  def log_status(message)
+    Rails.logger.info("Status: #{message}")
   end
 end
