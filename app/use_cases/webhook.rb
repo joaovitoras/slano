@@ -5,6 +5,7 @@ class Webhook
   def initialize(params)
     payload = JSON.parse(params[:payload] || "{}").with_indifferent_access
     Rails.logger.info("parametros #{payload}")
+    Rails.logger.info(payload[:pull_request])
     @api = Solano::Api.new
     @pull_request = payload[:pull_request]
     @sender = payload[:sender]
