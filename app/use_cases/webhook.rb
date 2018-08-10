@@ -10,9 +10,9 @@ class Webhook
   end
 
   def perform
-    return unless pull_request.present?
-    return unless merged?
-    return unless default_branch?
+    return Rails.logger.info("status: sem pr") unless pull_request.present?
+    return Rails.logger.info("status: merged") unless merged?
+    return Rails.logger.info("status: não é na branch default") unless default_branch?
 
     status = solano_status
     send("notify_#{status}") if status.present?
