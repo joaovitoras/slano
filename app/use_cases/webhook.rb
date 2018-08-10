@@ -3,10 +3,11 @@ class Webhook
   DEFAULT_REPO_URL = "ssh://git@github.com/redealumni/quero_bolsa"
 
   def initialize(params)
-    Rails.logger.info("parametros #{params}")
+    payload = JSON.parse(params[:payload] || "{}")
+    Rails.logger.info("parametros #{payload}")
     @api = Solano::Api.new
-    @pull_request = params[:pull_request]
-    @sender = params[:sender]
+    @pull_request = payload[:pull_request]
+    @sender = payload[:sender]
   end
 
   def perform
