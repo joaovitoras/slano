@@ -3,6 +3,7 @@ class Webhook
   DEFAULT_REPO_URL = "ssh://git@github.com/redealumni/quero_bolsa"
 
   def initialize(params)
+    Rails.logger.info("parametros #{params}")
     @api = Solano::Api.new
     @pull_request = params[:pull_request]
     @sender = params[:sender]
@@ -33,13 +34,15 @@ class Webhook
     suites = api.user_suites(DEFAULT_REPO_URL, branch)["suites"]
 
     return :avoid_suite if suites.blank?
-    return :session_failed if last_session_failed?(suites)
+    last_session_status(suites)
   end
 
-  def last_session_failed?(suites)
+  def last_session_status(suites)
     suite_id = suites[0]["id"]
     last_session = api.sessions(suite_id, 1)["sessions"].first
-    last_session["status"] != "passed"
+
+    return :avoid_suite if last_session.blank?
+    return :session_failed if last_session["status"] != "passed"
   end
 
   def notify_avoid_suite
