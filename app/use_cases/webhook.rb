@@ -42,7 +42,7 @@ class Webhook
     last_session = api.sessions(suite_id, 1)["sessions"].first
 
     return :avoid_suite if last_session.blank?
-    return :session_failed if last_session["status"] != "passed"
+    return :session_failed if ['failed', 'error'].include? last_session["status"]
   end
 
   def notify_avoid_suite
@@ -50,7 +50,7 @@ class Webhook
   end
 
   def notify_session_failed
-    notify("Eu fiz merge do #{pr_link} com build falhando no solano :smiling_imp:")
+    notify("Eu fiz merge do #{pr_link} com build que não passou no solano :smiling_imp:")
   end
 
   def pr_link
