@@ -11,7 +11,7 @@ class Webhook
 
   def perform
     return log_status("Sem PR") unless pull_request.present?
-    return log_status("Não merged") unless merged?
+    return log_status("Não é merged") unless merged?
     return log_status("Não é merge na branch default") unless default_branch?
 
     status = solano_status
