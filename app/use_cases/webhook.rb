@@ -13,6 +13,7 @@ class Webhook
     return log_status("Sem PR") unless pull_request.present?
     return log_status("Não é merged") unless merged?
     return log_status("Não é merge na branch default") unless default_branch?
+    return log_status("Revert") if revert?
 
     status = solano_status
     send("notify_#{status}") if status.present?
@@ -26,6 +27,10 @@ class Webhook
 
   def default_branch?
     pull_request[:base][:ref] == pull_request[:head][:repo][:default_branch]
+  end
+
+  def revert?
+    (pull_request[:title] =~ /(R|r)evert/).to_i > 0
   end
 
   def solano_status
