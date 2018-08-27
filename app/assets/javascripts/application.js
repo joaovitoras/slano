@@ -26,3 +26,36 @@ $(function () {
               '</div>'
   })
 })
+
+const formFilter = $('#js-form-filter');
+const bronkTestLink = $('#broken-test-alert')
+formFilter.submit((e) => {
+  e.preventDefault();
+  loadHistoryChart();
+  loadHistoryTimeChart();
+  loadBrokenTestAlert();
+})
+
+bronkTestLink.click(() => {
+  bronkTestLink.removeClass('jello-horizontal');
+})
+
+function loadBrokenTestAlert() {
+  $.ajax("broken_tests", {
+    data: formFilter.serialize()
+  }).done(function (testNames) {
+    if (testNames.length > 0) {
+      bronkTestLink.addClass("text-warning jello-horizontal");
+      bronkTestLink.attr("data-content", testNames);
+    } else {
+      bronkTestLink.removeClass('text-warning jello-horizontal');
+    }
+  })
+    .fail(function () {
+      alert("error");
+    });
+}
+
+loadHistoryChart();
+loadHistoryTimeChart();
+loadBrokenTestAlert();

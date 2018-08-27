@@ -2,11 +2,45 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="loading-wrappper" id="js-loading">
+    <div class="loading-wrappper" id="js-loading-history">
       <%= image_tag 'loading.svg' %>
     </div>
 
     <canvas id="historyChartCanvas" width="50%"></canvas>
+  </div>
+
+  <div class="col-md-4">
+    <div class="data-box">
+      <div class="data-box__item data-box__item--green">
+        Passed
+        <div id="js-passed-value">0</div>
+      </div>
+      <div class="data-box__item data-box__item--red">
+        Error
+        <div id="js-error-value">0</div>
+      </div>
+      <div class="data-box__item data-box__item--orange">
+        SetupFailed
+        <div id="js-setupfailed-value">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="loading-wrappper" id="js-loading-history-time">
+      <%= image_tag 'loading.svg' %>
+    </div>
+
+    <canvas id="historyTimeChartCanvas" width="50%"></canvas>
+  </div>
+
+  <div class="col-md-4">
+    <div class="data-box">
+      <div class="data-box__item data-box__item--blue">
+        Duração Média (Hoje)
+        <div id="js-duration-avg">0m</div>
+      </div>
+    </div>
   </div>
 </div>
 

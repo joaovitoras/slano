@@ -81,19 +81,19 @@ class SessionStatusByDate
         {
           label: 'passed',
           borderColor: "rgb(164, 198, 26)",
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(164, 198, 26, 0.04)",
           data: sessions.map {|_k, v| v[0]},
         },
         {
           label: 'failed',
           borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(255, 99, 132, 0.04)",
           data: sessions.map {|_k, v| v[1]},
         },
         {
           label: 'setupfailed',
           borderColor: "rgb(255, 205, 86)",
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(255, 205, 86, 0.04)",
           data: sessions.map {|_k, v| v[2]},
         }
       ]

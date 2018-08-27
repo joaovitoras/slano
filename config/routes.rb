@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   controller 'status_history' do
     get 'sessions_status_by_date'
+    get 'sessions_time_by_date'
     get 'broken_tests'
   end
 

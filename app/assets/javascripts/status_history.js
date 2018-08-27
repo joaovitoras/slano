@@ -1,43 +1,18 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
-const formFilter = $('#js-form-filter');
-const bronkTestLink = $('#broken-test-alert')
-formFilter.submit((e) => {
-  e.preventDefault();
-  loadChart();
-  loadBrokenTestAlert();
-})
-
-bronkTestLink.click(() => {
-  bronkTestLink.removeClass('jello-horizontal');
-})
-
-function loadBrokenTestAlert() {
-  $.ajax("broken_tests", {
-    data: formFilter.serialize()
-  }).done(function (testNames) {
-    if (testNames.length > 0) {
-      bronkTestLink.addClass("text-warning jello-horizontal");
-      bronkTestLink.attr("data-content", testNames);
-    } else {
-      bronkTestLink.removeClass('text-warning jello-horizontal');
-    }
-  })
-  .fail(function () {
-    alert("error");
-  });
-}
-
-
-function loadChart() {
+function loadHistoryChart() {
   $.ajax("sessions_status_by_date", {
     data: formFilter.serialize()
   }).done(function (data) {
-      var ctx = document.getElementById('historyChartCanvas').getContext('2d');
+    var ctx = document.getElementById('historyChartCanvas').getContext('2d');
+    $('#js-loading-history').hide();
+    const lastPassed = data.datasets[0].data;
+    const lastFailed = data.datasets[1].data;
+    const lastSetupFailed = data.datasets[2].data;
 
-      $('#js-loading').hide();
-      if (window.historyChart) {
+    $('#js-passed-value').text(lastPassed[lastPassed.length - 1]);
+    $('#js-error-value').text(lastFailed[lastFailed.length - 1]);
+    $('#js-setupfailed-value').text(lastSetupFailed[lastSetupFailed.length - 1]);
+
+    if (window.historyChart && window.historyChart.data) {
         window.historyChart.data = data;
         window.historyChart.update();
       } else {
@@ -65,6 +40,3 @@ function loadChart() {
       alert("error");
     });
 }
-
-loadChart();
-loadBrokenTestAlert();

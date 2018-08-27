@@ -4,6 +4,11 @@ class StatusHistoryController < ApplicationController
     render json: result
   end
 
+  def sessions_time_by_date
+    result = SessionTimeByDate.new(params[:repo_url], params[:branch]).perform
+    render json: result
+  end
+
   def broken_tests
     result = BrokenTests.new(params[:repo_url], params[:branch]).perform
     render json: result
